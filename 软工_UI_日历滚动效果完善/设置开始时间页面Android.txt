@@ -1,0 +1,27 @@
+<!-- Calendar_creating_events_setting_starting_time2 -->
+<View
+android:id="@+id/Calendar_creating_events_setting_starting_time2" android:layout_width="390dp" android:layout_height="994dp" android:background="drawable/Calendar_creating_events_setting_starting_time2"
+/>
+
+<!-- drawable/Calendar_creating_events_setting_starting_time2.xml -->
+<vector
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:appt="http://schemas.android.com/aapt"
+android:width="390dp"
+android:height="994dp"
+android:viewportWidth="390"
+android:viewportHeight="994"
+>
+<group>
+<clip-path
+  android:pathData="M0 0H390V994H0V0"
+/>
+
+<path
+android:pathData="M0 0H390V994H0V0"
+android:fillColor="rgba(255, 255, 255, 1)"
+/>
+ 
+</group>
+
+</vector>
