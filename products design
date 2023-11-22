@@ -12,9 +12,11 @@ The statistics interface includes the total number of trips, trip attendance rat
 Home page interface（The face photo interface）：
 Search the itinerary, search and join the itinerary, and return to the home page after completion.
 The current trip, the user selects the trip, jump out of the photo interface.
-At the bottom of the photo interface, there is a photo button to shoot in real time. In the lower left corner, return to the previous step, and you can select the photos in the history album in the lower right corner.
+At the bottom of the photo interface, there is a photo button to shoot in real time.
+In the lower left corner, return to the previous step, and you can select the photos in the history album in the lower right corner.
 The image jumping out is the final image, which can be brightness adjusted and cut. Return to the upper step in the lower left corner and the next step in the lower right corner.
-In the interface, you will list the absent people according to the team, and the absent person will present the user's avatar, user name, and the check in the upper left corner. The user manually confirm the personnel by the manual tick. Return to the previous step in the lower left corner, and the lower right corner goes back to the home page.
+In the interface, you will list the absent people according to the team, and the absent person will present the user's avatar, user name, and the check in the upper left corner. 
+The user manually confirm the personnel by the manual tick. Return to the previous step in the lower left corner, and the lower right corner goes back to the home page.
 Team interface：
 My team is the list of the team, click out the name of the team, valid time and list, return in the lower right corner.
 Create a team to name the team, select the valid time, and confirm the list. The bottom right corner to confirm the creation.
