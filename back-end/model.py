@@ -20,3 +20,8 @@ class User(db.Model):
     name=db.Column(db.String(100))
     password=db.Column(db.String(100))
     
+class ImageFile(db.Model):
+    __tablename__ = 'ImageFile'
+    id = db.Column(db.Integer, primary_key=True)
+    image_name = db.Column(db.String(30), index=True)
+    path = db.Column(db.String(50), index=True)
