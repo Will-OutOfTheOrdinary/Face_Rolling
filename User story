@@ -1,1 +1,27 @@
-用户故事
+The trip is about to start, and the user begins to roll the call.
+Open the software, he will see the interface from left to right are: activity, calendar, home page, team, mine.
+He will click on my interface to register or log in, and fill in the account number and password.
+If he needs to view a message sent by others, then he will click on the activity interface.
+He can receive private messages and recent notifications from different people in time.
+The user name, user avatar, bulletin board, and file are displayed in the notification interface.
+The private message interface presents the user profile picture, user name, dialog box, input method, facial expressions, pictures, and files.
+If he needs to check a recent trip, he'll click on the calendar interface.
+He will see the calendar schedule sliding up and down on the interface.
+He can create itineraries, name them, set their active time, and set the team.
+He can choose the itinerary, the name of the itinerary will appear in the title, below is the message, information and statistics.
+In the message interface, he can communicate and leave messages, see the user's profile picture, user name, dialog box, input method, and can also send emoticons, files and pictures.
+In the information interface, he can see the trip name, the valid time of the trip, and the team name and team list.
+In the statistics interface, he can see the total number of people, the attendance and documents.
+Assuming he needs to make a face recognition roll call, he will click on the home page, or the face photo interface.
+He can see that the first line is the search itinerary, and he can search and join the itinerary, and then go back to the front page.
+The second line lists the current itinerary, he can choose the itinerary, and then start the roll call and jump out of the photo interface.
+He can choose to take pictures manually, with a photo button right below, the lower left corner is the previous step, and the lower right corner can choose the photos in the history album.
+When he picks the photo, he jumps out, the final picture, which he can adjust and cut. Make sure the correct picture, you can go to the next step or go back to the previous step.
+He can see that the interface will list the absent people according to the team, and the absent people will present his avatar, the name, and the tick in the upper left corner. He can manually check and confirm the presence. The lower left corner goes back to the previous step, and the lower right corner goes back to the home page.
+If he needs to view his team, then he will click on the team interface.
+He saw two options jump out. The first one is called my team, and the second one is called the creation team.
+He clicks on my team and my team list appears, click on one of the teams, and the team name, valid time and team list will appear.
+He clicks to create a team and we can name the team, select the valid time and the team list. In the lower right corner, you can click to confirm the creation team.
+If he needs to view his information, then he will click on my interface.
+He saw my name, ID, avatar and face displayed at the top of the interface, which can be edited.
+He can provide advice feedback.
