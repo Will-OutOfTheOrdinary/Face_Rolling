@@ -13,15 +13,36 @@ app.config.from_object(configs)
 # db绑定app
 db = SQLAlchemy(app)
 
-
+class Follow(db.Model):
+    __tablename__ = 'Follow'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("Users.id"))  
+    teambelong_id = db.Column(db.Integer, db.ForeignKey("TeamBelong.id")) 
+    
 class User(db.Model):
     __tablename__ = 'User'
     id = db.Column(db.Integer, primary_key=True)  # 设置主键, 默认自增
     name=db.Column(db.String(100))
     password=db.Column(db.String(100))
-    
+    teambelong = db.relationship("TeamBelong", secondary="Follow", back_populates="users")
+
 class ImageFile(db.Model):
     __tablename__ = 'ImageFile'
     id = db.Column(db.Integer, primary_key=True)
     image_name = db.Column(db.String(30), index=True)
-    path = db.Column(db.String(50), index=True)
+    path = db.Column(db.String(50))
+    
+class TeamBelong(db.Model):
+    __tablename__ = 'TeamBelong'
+    id = db.Column(db.Integer, primary_key=True)  # 设置主键, 默认自增
+    number=db.Column(db.Integer())
+    name=db.Column(db.String(100))
+    user = db.relationship("User", secondary="Follow", back_populates="teambelongs")
+    
+class TeamHave(db.Model):
+    __tablename__ = 'TeamHave'
+    id = db.Column(db.Integer, primary_key=True)  # 设置主键, 默认自增
+    user_id = db.Column(db.Integer(),db.ForeignKey('User.id'))
+    user = db.relationship('User', backref=db.backref('teamhaves'))
+    number=db.Column(db.Integer())
+    name=db.Column(db.String(100))
