@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@mipmap/loginback"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="请注册"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="请完善您的个人信息"
+        android:textStyle="normal"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/lohgincircule"
+        android:layout_gravity="center"
+        android:layout_marginTop="23dp"/>
+
+    <EditText
+        android:hint="请输入手机号/邮箱"
+        android:textColorHint="#95a1aa"
+        android:inputType="text"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:background="@drawable/shape"
+        android:layout_width="200dp"
+        android:layout_height="40dp" />
+
+    <RelativeLayout
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="13dp">
+        <EditText
+            android:hint="请输入验证码"
+            android:textColorHint="#95a1aa"
+            android:layout_alignParentLeft="true"
+            android:inputType="textPassword"
+            android:gravity="center"
+            android:background="@drawable/shape"
+            android:layout_width="130dp"
+            android:layout_height="40dp" />
+
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/shaplelogin"
+            android:text="发送验证码"
+            android:textSize="11dp"
+            />
+    </RelativeLayout>
+
+    <EditText
+        android:hint="请输入密码"
+        android:textColorHint="#95a1aa"
+        android:inputType="textPassword"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:background="@drawable/shape"
+        android:layout_width="200dp"
+        android:layout_height="40dp" />
+
+    <EditText
+        android:hint="请确认密码"
+        android:textColorHint="#95a1aa"
+        android:inputType="textPassword"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:background="@drawable/shape"
+        android:layout_width="200dp"
+        android:layout_height="40dp" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="13dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/shaplelogin"
+        android:text="注册并登录"
+        android:textColor="@color/white"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:drawableLeft="@drawable/restart"
+            android:drawablePadding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="重新发送验证码"/>
+
+
+
+
+    </RelativeLayout>
+</LinearLayout>

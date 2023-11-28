@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@mipmap/loginback"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="欢迎登录"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="请输入您的账号与密码"
+        android:textStyle="normal"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/lohgincircule"
+        android:layout_gravity="center"
+        android:layout_marginTop="23dp"/>
+
+    <EditText
+        android:hint="请输入账号"
+        android:textColorHint="#95a1aa"
+        android:inputType="text"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:background="@drawable/shape"
+        android:layout_width="200dp"
+        android:layout_height="40dp" />
+
+    <EditText
+        android:hint="请输入密码"
+        android:textColorHint="#95a1aa"
+        android:inputType="textPassword"
+        android:gravity="center"
+        android:layout_marginTop="13dp"
+        android:layout_gravity="center"
+        android:background="@drawable/shape"
+        android:layout_width="200dp"
+        android:layout_height="40dp" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="13dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/shaplelogin"
+        android:text="登录"
+        android:textColor="@color/white"/>
+
+    <RelativeLayout
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/zhuce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="注册"
+            android:clickable="true"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="忘记密码"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>
