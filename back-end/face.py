@@ -9,9 +9,9 @@ from flask import Blueprint
 from sqlalchemy import desc 
 face_api = Blueprint('face_app', __name__,static_folder='images')
 
-@app.route('/input_image/', methods=['POST'])
-def input_image():
-    img=request.files.get("image")
+@app.route('/takePhoto/', methods=['POST'])
+def takePhoto():
+    img=request.files.get("photo")
     file_path=None
     if img is not None:
         nnn=img.filename.split('.')

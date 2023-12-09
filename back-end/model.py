@@ -3,28 +3,26 @@ from sqlalchemy import create_engine, Column, Integer, String, DateTime, Date
 from flask_cors import CORS, cross_origin
 from flask_sqlalchemy import SQLAlchemy
 import sys
+from sqlalchemy.ext.declarative import declarative_base
 import configs
 app = Flask(__name__)
-
+from sqlalchemy import Table, Column, Integer, ForeignKey
 
 cors = CORS(app)
 # 加载配置文件
 app.config.from_object(configs)
 # db绑定app
 db = SQLAlchemy(app)
+Base = declarative_base()
+    
 
-class Follow(db.Model):
-    __tablename__ = 'Follow'
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("Users.id"))  
-    teambelong_id = db.Column(db.Integer, db.ForeignKey("TeamBelong.id")) 
     
 class User(db.Model):
     __tablename__ = 'User'
     id = db.Column(db.Integer, primary_key=True)  # 设置主键, 默认自增
     name=db.Column(db.String(100))
     password=db.Column(db.String(100))
-    teambelong = db.relationship("TeamBelong", secondary="Follow", back_populates="users")
+    teambelongs = db.relationship("TeamBelong", secondary='User_Goods',back_populates='User')
 
 class ImageFile(db.Model):
     __tablename__ = 'ImageFile'
@@ -37,7 +35,7 @@ class TeamBelong(db.Model):
     id = db.Column(db.Integer, primary_key=True)  # 设置主键, 默认自增
     number=db.Column(db.Integer())
     name=db.Column(db.String(100))
-    user = db.relationship("User", secondary="Follow", back_populates="teambelongs")
+    users = db.relationship("User", secondary='User_Goods',back_populates='TeamBelong')
     
 class TeamHave(db.Model):
     __tablename__ = 'TeamHave'
@@ -45,4 +43,16 @@ class TeamHave(db.Model):
     user_id = db.Column(db.Integer(),db.ForeignKey('User.id'))
     user = db.relationship('User', backref=db.backref('teamhaves'))
     number=db.Column(db.Integer())
+    name=db.Column(db.String(100))
+    
+
+class User_Goods(db.Model):
+    __tablename__ = 'User_Goods'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('User.id'), nullable=False)
+    TeamBelong_id = db.Column(db.Integer, db.ForeignKey('TeamBelong.id'), nullable=False)
+
+class Course(db.Model):
+    _tablename__ = 'Course'
+    id = db.Column(db.Integer, primary_key=True)  # 设置主键, 默认自增
     name=db.Column(db.String(100))

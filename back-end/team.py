@@ -4,7 +4,7 @@ import numpy as np
 import math
 import cv2
 from flask_sqlalchemy import SQLAlchemy
-from model import app,db,User,ImageFile,TeamBelong,TeamHave,Follow
+from model import app,db,User,ImageFile,TeamBelong,TeamHave
 from flask import Blueprint
 from sqlalchemy import desc 
 team_api = Blueprint('team_app', __name__)
@@ -106,10 +106,11 @@ def add_team_member():
     idd2=request.args.get("id_team")
     t1=TeamBelong.query.get(idd2)
     t2=TeamHave.query.filter(TeamHave.name==t1.name).first()
+    u=User.query.get(idd1)
     t1.number=t1.number+1
     t2.number=t2.number+1
-    f=Follow(user_id=idd1, teambelong_id=idd2)
-    db.session.add(f)
+    t1.users.append(u)
+    u.teambelongs.append(t1)
     db.session.commit()
     return jsonify({'status': 200, 'message': 'success'})
     
@@ -121,8 +122,9 @@ def delete_team_member():
     t2=TeamHave.query.filter(TeamHave.name==t1.name).first()
     t1.number=t1.number-1
     t2.number=t2.number-1
-    f=Follow.query.filter(Follow.user_id==idd1, Follow.teambelong_id==idd2)
-    db.session.delete(f)
+    u=User.query.get(idd1)
+    t1.users.remove(u)
+    u.teambelongs.remove(t1)
     db.session.commit()
     return jsonify({'status': 200, 'message': 'success'})
     
@@ -145,8 +147,8 @@ def delete_belong_team():
     db.session.commit()
     return jsonify({'status': 200, 'message': 'success'})
     
-@app.route('/add_team/', methods=['GET'])
-def add_team():
+@app.route('/creatTeam/', methods=['POST'])
+def creatTeam():
     n=request.args.get("name")
     t1=TeamBelong(name=n,number=0)
     t2=TeamHave(name=n,number=0)
