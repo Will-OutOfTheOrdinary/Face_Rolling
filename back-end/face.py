@@ -7,6 +7,12 @@ from flask_sqlalchemy import SQLAlchemy
 from model import app,db,User,ImageFile
 from flask import Blueprint
 from sqlalchemy import desc 
+import cv2
+import numpy as np
+import insightface
+from insightface.app import FaceAnalysis
+from insightface.data import get_image as ins_get_image
+
 face_api = Blueprint('face_app', __name__,static_folder='images')
 
 @app.route('/takePhoto/', methods=['POST'])
@@ -33,3 +39,27 @@ def takePhoto():
             cv2.imwrite("./"+file_path,immg)
         db.session.commit()
     return jsonify({'status': 200, 'message': 'success'})
+
+@app.route('/face_recognize/', methods=['POST'])
+def face_recognize():
+    img1=request.files.get("image1")
+    img2=request.files.get("image2")
+    img1.save("./img1.jpg")
+    img2.save("./img2.jpg")
+    app = FaceAnalysis(providers=['CPUExecutionProvider'])
+    app.prepare(ctx_id=-1, det_size=(640, 640))
+    img = cv2.imread('img1.jpg')
+    faces = app.get(img)
+    feats = []
+    for face in faces:
+        feats.append(face.normed_embedding)
+    feats = np.array(feats, dtype=np.float32)
+    target = cv2.imread("img2.jpg")
+    target_faces = app.get(target)   
+    target_feat = np.array(target_faces[0].normed_embedding, dtype=np.float32)
+    sims = np.dot(feats, target_feat)
+    target_index = int(sims.argmax())
+    check=False
+    if(sims[target_index]>=0.5):
+        check=True
+    return jsonify({'status': 200, 'message': 'success', 'check':check})
