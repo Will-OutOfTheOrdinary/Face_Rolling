@@ -10,15 +10,21 @@ course_api = Blueprint('course_app', __name__)
 @app.route('/addCourse',methods=['POST'])
 def addCourse():
     teamName = request.form.get("teamName")
+    date=request.form.get("date")
+    startTime=request.form.get("startTime")
+    endTime=request.form.get("endTime")
     c = Course.query.filter(Course.name==teamName).first()
-    if c is None:
+    if c is not None:
         return jsonify({'status': 400, 'message': '已存在', 'data': ''})
-    new_course=Course(name=teamName)
+    new_course=Course(name=teamName,date=date,startTime=startTime,endTime=endTime)
     db.session.add(new_course)
     db.session.commit()
     use={
     'id':new_course.id,
     'teamName' : teamName,
+    'date':date,
+    'startTime':startTime,
+    'endTime':endTime
     }
     return jsonify({'status': 201, 'message': 'success', 'data': use})
     
@@ -29,6 +35,9 @@ def searchCourse():
     use={
     'id':c.id,
     'teamName' : c.name,
+    'date':c.date,
+    'startTime':c.startTime,
+    'endTime':c.endTime
     }
     return jsonify({'status': 201, 'message': 'success', 'data': use})
 
@@ -39,5 +48,8 @@ def getCourseInfor():
     use={
     'id':c.id,
     'teamName' : c.name,
+    'date':c.date,
+    'startTime':c.startTime,
+    'endTime':c.endTime
     }
     return jsonify({'status': 201, 'message': 'success', 'data': use})

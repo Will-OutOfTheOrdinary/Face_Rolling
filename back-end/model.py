@@ -22,20 +22,23 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)  # 设置主键, 默认自增
     name=db.Column(db.String(100))
     password=db.Column(db.String(100))
-    teambelongs = db.relationship("TeamBelong", secondary='User_Goods',back_populates='User')
+    phone=db.Column(db.String(100))
+    teambelongs = db.relationship("TeamBelong", secondary='User_Goods',back_populates='users')
 
 class ImageFile(db.Model):
     __tablename__ = 'ImageFile'
     id = db.Column(db.Integer, primary_key=True)
     image_name = db.Column(db.String(30), index=True)
     path = db.Column(db.String(50))
+    user_id = db.Column(db.Integer(),db.ForeignKey('User.id'))
+    user = db.relationship('User', backref=db.backref('images'))
     
 class TeamBelong(db.Model):
     __tablename__ = 'TeamBelong'
     id = db.Column(db.Integer, primary_key=True)  # 设置主键, 默认自增
     number=db.Column(db.Integer())
     name=db.Column(db.String(100))
-    users = db.relationship("User", secondary='User_Goods',back_populates='TeamBelong')
+    users = db.relationship("User", secondary='User_Goods',back_populates='teambelongs')
     
 class TeamHave(db.Model):
     __tablename__ = 'TeamHave'
@@ -56,3 +59,6 @@ class Course(db.Model):
     _tablename__ = 'Course'
     id = db.Column(db.Integer, primary_key=True)  # 设置主键, 默认自增
     name=db.Column(db.String(100))
+    date=db.Column(db.String(100))
+    startTime=db.Column(db.String(100))
+    endTime=db.Column(db.String(100))

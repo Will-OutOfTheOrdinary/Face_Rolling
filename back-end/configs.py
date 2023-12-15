@@ -1,6 +1,6 @@
 HOST = '127.0.0.1'
 PORT = '3306'
-DATABASE = 'softsecond'
+DATABASE = 'faceroll'
 USERNAME = 'root'
 PASSWORD = 'csh1q2w3e4r'
 

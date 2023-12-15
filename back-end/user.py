@@ -37,48 +37,81 @@ def phonecheck(s):
 
 @app.route('/login',methods=['POST'])
 def login():
-    name = request.form.get("account")
+    name = request.form.get("name")
     password = request.form.get("password")
+    a={
+        "id":-1,
+        "name":"",
+        "password":"",
+        "account":"",
+        'phone':"",
+        "avatarUrl":"",
+        "joinInTeam":""
+    }
     if not all([name,password]):
-        return jsonify({'status': 400, 'message': '参数不完整', 'data': ''})
-    user = User.query.filter(User.name==name,User.password==password).first()
-    if user is None:
-        return jsonify({'status': 404, 'message': '无此用户', 'data': ''})
-    if user:
-        use={
-        'id': user.id,
-        'username' : name,
-        'password' : password,
+        return jsonify({'status': 400, 'message': '参数不完整', 'data': a})
+    u = User.query.filter(User.name==name,User.password==password).first()
+    if u is None:
+        return jsonify({'status': 404, 'message': '用户名或者密码错误','data':a})
+    recs=u.images
+    ans={
+            "id":u.id,
+            "name":u.name,
+            "password":u.password,
+            "account":u.phone,
+            'phone':u.phone,
+            "avatarUrl":'images/avatar_default.png',
+            "joinInTeam":""
         }
-        return jsonify({'status': 200, 'message': 'success', 'data': use})
-    else:
-        return jsonify({'status': 400, 'message': '用户名或者密码错误', 'data': ''})
+    for rec in recs:
+        ans={
+            "id":u.id,
+            "name":u.name,
+            "password":u.password,
+            "account":u.phone,
+            'phone':u.phone,
+            "avatarUrl":rec.path,
+            "joinInTeam":""
+        }
+        #break
+    bs=u.teambelongs
+    xx=[]
+    for b in bs:
+        vi={'id':b.id,'name':b.name}
+        xx.append(vi)
+    ans['joinInTeam']=xx
+    return jsonify({'status': 200, 'message': 'success', 'data': ans})
     
 @app.route('/register',methods=['POST'])
 def register():
     phone=request.form.get('phone')
     verification=request.form.get('verification')
-    username = request.form.get('account')
+    username = request.form.get('name')
     password1 = request.form.get('password1')
     password2 = request.form.get('password2')
+    u={
+            'id':-1,
+            'name' : "",
+            'password' : ""
+    }
     if not all([username,password1,password2,phone,verification]):
-        return jsonify({'status': 400, 'message': '参数不完整', 'data': ''})
+        return jsonify({'status': 400, 'message': '参数不完整', 'data': u})
     elif password1 != password2:
-        return jsonify({'status': 400, 'message': '两次密码不一致，请重新输入', 'data': ''})
-    elif User.query.filter(name=username).all():
-        return jsonify({'status': 400, 'message': '用户名已存在', 'data': ''})
+        return jsonify({'status': 400, 'message': '两次密码不一致，请重新输入', 'data': u})
+    elif User.query.filter_by(name=username).all():
+        return jsonify({'status': 400, 'message': '用户名已存在', 'data': u})
     elif User.query.filter_by(phone=phone).all():
-        return jsonify({'status': 400, 'message': '手机号已存在', 'data': ''})
+        return jsonify({'status': 400, 'message': '手机号已存在', 'data': u})
     elif verification!=rd.get(phone):
-        return jsonify({'status': 400, 'message': '验证码错误', 'data': ''})
+       return jsonify({'status': 400, 'message': '验证码错误', 'data': u})
     else:
         new_user = User(name=username,password=password1,phone=phone)
         db.session.add(new_user)
         db.session.commit()
         use={
             'id':new_user.id,
-            'username' : username,
-            'password' : password1,
+            'name' : username,
+            'password' : password1
         }
         return jsonify({'status': 201, 'message': 'success', 'data': use})
     
@@ -89,13 +122,17 @@ def get_code():
         code += str(add)
     return code
 
-@app.route('/getVerification/',methods=['POST'])
+@app.route('/getVerification',methods=['POST'])
 def getVerification():
-    tel=request.form.get('telephone')
+    tel=request.form.get('phone')
+    u={
+        'telephone':"",
+        'code':""
+    }
     if tel is None:
-        return jsonify({'status': 400, 'message': '手机号为空', 'data': ''})
+        return jsonify({'status': 400, 'message': '手机号为空', 'data': u})
     if phonecheck(tel) is False:
-        return jsonify({'status': 400, 'message': '手机号错误', 'data': ''})
+        return jsonify({'status': 400, 'message': '手机号错误', 'data': u})
     code=get_code()
     request1 = SendSmsRequest()
     request1.set_accept_format('json')
@@ -113,4 +150,49 @@ def getVerification():
         }
         return jsonify({'status': 200, 'message': '成功发送', 'data': use})
     else:
-        return jsonify({'status': 400, 'message': '发送失败', 'data': ''})
+        return jsonify({'status': 400, 'message': '发送失败', 'data': u})
+    
+    
+@app.route('/getPersonalInfor',methods=['POST'])
+def getPersonalInfor():
+    idd=request.form.get('id')
+    u=User.query.get(idd)
+    a={
+        "id":-1,
+        "name":"",
+        "password":"",
+        "account":"",
+        'phone':"",
+        "avatarUrl":"",
+        "joinInTeam":""
+    }
+    if u is None:
+        return jsonify({'status': 404, 'message': '无此用户','data':a})
+    recs=u.images
+    ans={
+            "id":u.id,
+            "name":u.name,
+            "password":u.password,
+            "account":u.phone,
+            'phone':u.phone,
+            "avatarUrl":'images/avatar_default.png',
+            "joinInTeam":""
+        }
+    for rec in recs:
+        ans={
+            "id":u.id,
+            "name":u.name,
+            "password":u.password,
+            "account":u.phone,
+            'phone':u.phone,
+            "avatarUrl":rec.path,
+            "joinInTeam":""
+        }
+        #break
+    bs=u.teambelongs
+    xx=[]
+    for b in bs:
+        vi={'id':b.id,'name':b.name}
+        xx.append(vi)
+    ans['joinInTeam']=xx
+    return jsonify({'status': 200, 'message': 'success', 'data': ans})

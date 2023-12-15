@@ -5,23 +5,18 @@ from  geventwebsocket.handler import WebSocketHandler
 from  gevent.pywsgi import WSGIServer
 from model import app,db
 from flask import Blueprint
-
-from main import user_socket_dict1,user_socket_dict2
 import json
 communicaty_api = Blueprint('communicaty_app', __name__)
-
-@app.route('/index/')
-def index():
-    return render_template('websocket.html')
-
+user_socket_dict1={}
+user_socket_dict2={}
 # user_socket_list = []
 user_socket_dict={}
 
 @app.route('/chat_room/<username>')
-def ws(username):
+def chat_room(username):
     user_socket=request.environ.get("wsgi.websocket")
-    if not user_socket:
-        return "请以WEBSOCKET方式连接"
+#    if not user_socket:
+#        return "请以WEBSOCKET方式连接"
 
     user_socket_dict1[username]=user_socket
     print(user_socket_dict1)
@@ -48,10 +43,10 @@ def ws(username):
 
 
 @app.route('/chat/<username>')
-def ws(username):
+def chat(username):
     user_socket=request.environ.get("wsgi.websocket")
-    if not user_socket:
-        return "请以WEBSOCKET方式连接"
+ #   if not user_socket:
+ #       return "请以WEBSOCKET方式连接"
 
     user_socket_dict2[username]=user_socket
     print(user_socket_dict2)
